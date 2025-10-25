@@ -1,0 +1,60 @@
+{
+	"name": "vite-plugin-php-components",
+	"version": "0.0.9",
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			},
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"bunup": "^0.15.7",
+		"typescript": "^5"
+	},
+	"peerDependencies": {
+		"vite": ">6.0.0"
+	},
+	"dependencies": {
+		"vite-plugin-html-rewrite": "^0.1.3"
+	},
+	"scripts": {
+		"build": "npx bunup",
+		"prepack": "npm run build"
+	},
+	"author": "Nikita 'donnikitos' Nitichevski <me@donnikitos.com> (https://donnikitos.com/)",
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/nititech/vite-plugin-php-components.git"
+	},
+	"bugs": {
+		"url": "https://github.com/nititech/vite-plugin-php-components/issues"
+	},
+	"homepage": "https://github.com/nititech/vite-plugin-php-components",
+	"description": "Transpile PHP-Components to PHP calls",
+	"keywords": [
+		"vite",
+		"vite-plugin",
+		"php components",
+		"php",
+		"php transpilation",
+		"php processing",
+		"components"
+	],
+	"license": "MIT"
+}
