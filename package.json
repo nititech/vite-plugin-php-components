@@ -1,6 +1,6 @@
 {
 	"name": "vite-plugin-php-components",
-	"version": "0.0.9",
+	"version": "0.0.91",
 	"type": "module",
 	"files": [
 		"dist"

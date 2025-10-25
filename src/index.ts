@@ -49,3 +49,5 @@ export function transpilePHPComponents(config?: Config): PluginOption {
 		]),
 	];
 }
+
+export default transpilePHPComponents;
