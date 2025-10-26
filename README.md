@@ -1,7 +1,7 @@
 # vite-plugin-php-components
 
-[![npm](https://img.shields.io/npm/dt/vite-plugin-php-components?style=for-the-badge)](https://www.npmjs.com/package/vite-plugin-php-components) ![GitHub Repo stars](https://img.shields.io/github/stars/donnikitos/vite-plugin-php-components?label=GitHub%20Stars&style=for-the-badge) [![GitHub](https://img.shields.io/github/license/donnikitos/vite-plugin-php-components?color=blue&style=for-the-badge)](https://github.com/donnikitos/vite-plugin-php-components/blob/master/LICENSE)
-![GitHub last commit](https://img.shields.io/github/last-commit/donnikitos/vite-plugin-php-components?style=for-the-badge) [![Issues](https://img.shields.io/github/issues/donnikitos/vite-plugin-php-components?style=for-the-badge)](https://github.com/donnikitos/vite-plugin-php-components/issues)
+[![npm](https://img.shields.io/npm/dt/vite-plugin-php-components?style=for-the-badge)](https://www.npmjs.com/package/vite-plugin-php-components) ![GitHub Repo stars](https://img.shields.io/github/stars/nititech/vite-plugin-php-components?label=GitHub%20Stars&style=for-the-badge) [![GitHub](https://img.shields.io/github/license/nititech/vite-plugin-php-components?color=blue&style=for-the-badge)](https://github.com/nititech/vite-plugin-php-components/blob/master/LICENSE)
+![GitHub last commit](https://img.shields.io/github/last-commit/nititech/vite-plugin-php-components?style=for-the-badge) [![Issues](https://img.shields.io/github/issues/nititech/vite-plugin-php-components?style=for-the-badge)](https://github.com/nititech/vite-plugin-php-components/issues)
 
 A Vite plugin to transpile [PHP-Components](https://packagist.org/packages/nititech/html-components) into pure PHP calls.\
 This plugin is intended to be used with [vite-plugin-php@>=3.0.0-beta](https://www.npmjs.com/package/vite-plugin-php) and [PHP-Components](https://packagist.org/packages/nititech/html-components)
