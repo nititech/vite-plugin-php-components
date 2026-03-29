@@ -34,7 +34,11 @@ function makePHPArray(attrs: Record<string, string>) {
 			value = `'${value}'`;
 		}
 
-		return `'${key}' => ${value}`;
+		if (key === '...') {
+			return `...${value}`;
+		} else {
+			return `'${key}' => ${value}`;
+		}
 	});
 
 	return `[${attrPairs.join(', ')}]`;
