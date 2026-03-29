@@ -73,6 +73,37 @@ This code will be transpiled during dev and build into code similar to this:
 </html>
 ```
 
+## Props spreading
+
+Since version 0.0.92 you have the possibility to spread props into a component!
+
+```php
+<components.Button
+	...="<?= ['type' => 'submit', 'class' => 'mx-auto']; ?>">
+	Noice!
+</components.Button>
+```
+
+This is especially useful if you want to pass down properties from a parent component:
+
+```php
+<?php
+
+namespace components;
+
+class StyledButton extends \HTML\Component {
+	public function render() {
+	?>
+	<components.Button
+		...="<?= $this->__props__(['*', '!class']); ?>"
+		class="some-fancy-styling">
+		<?= $this->children; ?>
+	</components.Button>
+	<?php
+	}
+}
+```
+
 ## Configuration
 
 This plugin automatically checks if you have installed [PHP-Components](https://packagist.org/packages/nititech/html-components) via Packagist.\
