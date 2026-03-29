@@ -37,13 +37,18 @@ export function transpilePHPComponents(config?: Config): PluginOption {
 				},
 				order: 'pre',
 				render(elementDetails, index) {
-					const varName = '$' + hashTagName(elementDetails.tagName);
 					const className =
 						'\\' + elementDetails.tagName.replace(/\./g, '\\');
-
 					const attrArray = makePHPArray(elementDetails.attribs);
 
-					return `<?php ${varName} = new ${className}(${attrArray}); ?>${elementDetails.innerHTML}<?php ${varName}->close(); ?>`;
+					if (elementDetails.innerHTML.trim() !== '') {
+						const varName =
+							'$' + hashTagName(elementDetails.tagName);
+
+						return `<?php ${varName} = new ${className}(${attrArray}); ?>${elementDetails.innerHTML}<?php ${varName}->close(); ?>`;
+					} else {
+						return `<?php ${className}::closed(${attrArray}); ?>`;
+					}
 				},
 			},
 		]),

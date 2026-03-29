@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "vite-plugin-php-components",
@@ -9,10 +10,10 @@
       "devDependencies": {
         "@types/bun": "latest",
         "bunup": "^0.15.7",
-        "vite": "^7.1.12",
+        "typescript": "^5",
       },
       "peerDependencies": {
-        "typescript": "^5",
+        "vite": ">6.0.0",
       },
     },
   },
