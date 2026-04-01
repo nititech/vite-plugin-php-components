@@ -1,10 +1,12 @@
+import escapeRegExp from 'regexp.escape'
+
 function trim(input: string, chars: string, position: 'start' | 'end' | 'both' = 'both'): string {
 	if (!input || !chars) {
 		return input;
 	}
 
 	let out = input.trim();
-	const escapedChars = RegExp.escape(chars);
+	const escapedChars = escapeRegExp(chars);
 
 	if (position === 'start' || position === 'both') {
 		out = out.replace(new RegExp(`^[${escapedChars}]+`, 'gs'), '');
