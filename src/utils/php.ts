@@ -60,6 +60,10 @@ export function makePHPArray(
 				});
 
 			value = `'${value}'`;
+
+			if (value.endsWith(").''")) {
+				value = value.substring(0, value.length - 3);
+			}
 		}
 
 		if (key === '...') {
