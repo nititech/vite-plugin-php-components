@@ -1,13 +1,15 @@
 import { type PluginOption, type ResolvedConfig } from 'vite';
 import rewriteHTML from 'vite-plugin-html-rewrite';
 import hashTagName from './utils/hashTagName';
-import makePHPArray from './utils/makePHPArray';
 import { existsSync, lstatSync } from 'node:fs';
+import { escapePhpBlock, makePHPArray, unescapePhpBlocks } from './utils/php';
 
 type Config = { skipLibCheck?: boolean };
 
 export function transpilePHPComponents(config?: Config): PluginOption {
 	let viteConfig: undefined | ResolvedConfig;
+
+	const phpBlocks = new Map<string, [string, string]>();
 
 	return [
 		{
@@ -30,6 +32,22 @@ export function transpilePHPComponents(config?: Config): PluginOption {
 				}
 			},
 		},
+		{
+			name: 'escape-php',
+			transform(code, id, options) {
+				if (id.endsWith('.html')) {
+					return {
+						code: escapePhpBlock(code, phpBlocks),
+					};
+				}
+			},
+			transformIndexHtml: {
+				order: 'pre',
+				handler(html, ctx) {
+					return escapePhpBlock(html, phpBlocks);
+				},
+			},
+		},
 		rewriteHTML([
 			{
 				match: (element) => {
@@ -39,7 +57,10 @@ export function transpilePHPComponents(config?: Config): PluginOption {
 				render(elementDetails, index) {
 					const className =
 						'\\' + elementDetails.tagName.replace(/\./g, '\\');
-					const attrArray = makePHPArray(elementDetails.attribs);
+					const attrArray = makePHPArray(
+						elementDetails.attribs,
+						phpBlocks,
+					);
 
 					if (elementDetails.innerHTML.trim() !== '') {
 						const varName =
@@ -52,6 +73,22 @@ export function transpilePHPComponents(config?: Config): PluginOption {
 				},
 			},
 		]),
+		{
+			name: 'unescape-php',
+			transform(code, id, options) {
+				if (id.endsWith('.html')) {
+					return {
+						code: unescapePhpBlocks(code, phpBlocks),
+					};
+				}
+			},
+			transformIndexHtml: {
+				order: 'pre',
+				handler(html, ctx) {
+					return unescapePhpBlocks(html, phpBlocks);
+				},
+			},
+		},
 	];
 }
 
