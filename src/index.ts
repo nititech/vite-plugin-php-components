@@ -3,6 +3,7 @@ import rewriteHTML from 'vite-plugin-html-rewrite';
 import hashTagName from './utils/hashTagName';
 import { existsSync, lstatSync } from 'node:fs';
 import { escapePhpBlock, makePHPArray, unescapePhpBlocks } from './utils/php';
+import { voidElements } from './utils/html';
 
 type Config = { skipLibCheck?: boolean };
 
@@ -48,6 +49,34 @@ export function transpilePHPComponents(config?: Config): PluginOption {
 				},
 			},
 		},
+		rewriteHTML([
+			{
+				match: (element) => {
+					return (
+						Object.keys(element.attribs).includes('...') &&
+						!element.tagName.includes('.')
+					);
+				},
+				order: 'pre',
+				render(elementDetails, index) {
+					let out = `<HTML.Element element="${elementDetails.tagName}"`;
+
+					Object.entries(elementDetails.attribs).forEach(
+						([name, value]) => {
+							out += ` ${name}="${value}"`;
+						},
+					);
+
+					if (voidElements.includes(elementDetails.tagName)) {
+						out += ' />';
+					} else {
+						out += `>${elementDetails.innerHTML}</HTML.Element>`;
+					}
+
+					return out;
+				},
+			},
+		]),
 		rewriteHTML([
 			{
 				match: (element) => {
